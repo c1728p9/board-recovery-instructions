@@ -1,6 +1,7 @@
 # Unbricking Guide for mbed Devices
+Older versions of DAPLink can potentially brick your NXP/Freescale microcontroller if you attempt to update its firmware on a Windows 10 machine. This bricking is a result of the device's bootloader or interface getting overwritten improperly during the flashing process. If your device is bricked, this guide will help you in recovering your board.
 
-Before starting the unbricking process, it will be helpful to determine whether the actual bootloader on your target bricked, or just it's interface. Follow the steps below to determine what needs to be done to recover your board.
+Before starting the unbricking process, it will be helpful to determine whether the actual bootloader on your target bricked, or just it's interface. Without going into details on what the difference is between the two, the flowchart below will help determine what needs to be done to recover your board.
 
 ![](images/flowchart.png "Flowchart used to determine status of bricked board")
 
@@ -9,12 +10,12 @@ Follow the steps in this section if the flowchart at the beginning of the docume
 
 ### Required items
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
-* [SWDAP debugging probe](https://developer.mbed.org/platforms/SWDAP-LPC11U35/).
+* [CMSIS-DAP debugging probe](https://developer.mbed.org/platforms/SWDAP-LPC11U35/).
 * [10 pin debug cable](https://developer.mbed.org/platforms/SWDAP-LPC11U35/).
 
 ### Step 1: Install pyOCD
-pyOCD is an Open Source Python 2.7 based library for programming and debugging ARM Cortex-M microcontrollers using CMSIS-DAP. In a terminal, you can install pyOCD using the following command:
-`sudo pip install pyOCD`
+pyOCD is an Open Source Python 2.7 based library for programming and debugging ARM Cortex-M microcontrollers using the CMSIS-DAP linked above. In a terminal, you can install pyOCD using the following command (install as superuser if using a Linux machine):
+`pip install pyOCD`
 
 Once pyOCD is installed, make a new directory, and put the file `restore_k20dx_firmware.py` at the root of that directory. `restore_k20dx_firmware.py` is a Python script used to flash binaries onto a bricked board.
 
@@ -30,19 +31,18 @@ Locate the 10-pin header associated with your board's k20dx flash. Usually, the 
 ![](images/connected.png "Connecting the debugger to the bricked board")
 
 ### Step 4: Flashing bricked board
-Now you are ready to flash the bricked board with your chosen firmware. Go to your directory that has the Python script, `restore_k20dx_firmware.py`. To run the script, use the following command (run with superuser privileges): `sudo python restore_k20dx_firmware.py`.
+Now you are ready to flash the bricked board with your chosen firmware. Go to your directory that has the Python script, `restore_k20dx_firmware.py`. To run the script, use the following command (run with superuser privileges if using a Linux machine): `python restore_k20dx_firmware.py`.
 
-The console then prompts you to specify which board to use as the debugger. The output looks similar to the following:
+The console then prompts you to specify which connected device to use as the debugger. The output looks similar to the following:
 ```
 id => usbinfo | boardname
 0 => NXP LPC800-MAX [k20d50m]
 1 => FRDM-K64F [k20d50m]
 input id num to choice your board want to connect
 ```
-Choose `id=0` here because that represents the debugger, and then hit enter. The unbricking begins. The terminal reports something like the following:
+In this list, `id=0` represents the debugger. Therefore, you would type `0` and then hit `Enter`. The unbricking begins, and the terminal reports something like the following:
 
 ```
-brandon@mint64 ~/Work/pyOCD $ sudo python restore_k20dx_firmware.py
 WARNING:root:Invalid coresight component, cidr=0x0
 WARNING:root:Invalid coresight component, cidr=0x1010101
 WARNING:root:Invalid coresight component, cidr=0x0
@@ -56,7 +56,7 @@ Now, unplug and replug the board into your computer normally (without holding do
 ## Unbricking interface
 Follow the steps in this section if the flowchart at the beginning of the document determined that your board's interface has been bricked.
 
-### Step 0: Required items
+### Required items
 * Windows 7 machine
 
 ### Step 1: Enter device into bootloader mode
