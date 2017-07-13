@@ -1,12 +1,16 @@
-# Unbricking Guide for mbed Devices
-Older versions of DAPLink can potentially brick your NXP/Freescale microcontroller if you attempt to update its firmware on a Windows 10 machine. This bricking is a result of the device's bootloader getting overwritten improperly during the flashing process. If your device is bricked, this guide will help you in recovering your board.
-
-Before starting the unbricking process, it will be helpful to determine whether the actual bootloader on your target bricked, or rather if its interface was corrupted. Without going into details on what the difference is between the two, the flowchart below will help determine what needs to be done to recover your board.
+# Unbricking and Updating mbed Devices
+Older versions of DAPLink can potentially brick your NXP/Freescale microcontroller if you attempt to update its firmware on a Windows 10 machine. This bricking is a result of the device's bootloader getting overwritten improperly during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly. Begin by following the flowchart below to determine what needs to be done to recover and safely update the DAPLink firmware on your board.
 
 ![](images/flowchart.png "Flowchart used to determine status of bricked board")
 
+If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then you have two options:
+1. If you have a Windows 7 machine available to you, then the easiest solution is to follow the steps outlined in the section `Updating with Windows 7`.
+2. Else, you can also follow the steps outlined in the section `Unbricking bootloader`.
+
+Finally, if the flowchart has determined that your board is _safe to update on a Windows 10 machine_, then this guide does not apply to you, and update your board normally following the directions outlined [here](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#overviewExpand).
+
 ## Unbricking bootloader
-Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked.
+Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked, or if your device is susceptible to bricking and you do not have access to a Windows 7 machine.
 
 ### Required items
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
@@ -15,7 +19,7 @@ Follow the steps in this section if the flowchart at the beginning of the docume
 * [DapLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Install pyOCD
-pyOCD is an Open Source Python 2.7 based library for programming and debugging ARM Cortex-M microcontrollers using the CMSIS-DAP linked above. In a terminal, you can install pyOCD using the following command (install as superuser if using a Linux machine):
+pyOCD is an Open Source Python 2.7 based library for programming and debugging ARM Cortex-M microcontrollers using the CMSIS-DAP that is linked above in the `Required items` section. In a terminal, you can install pyOCD using the following command (install as superuser if using a Linux machine):
 `pip install pyOCD`
 
 ### Step 2: Connect debugger to bricked board
@@ -26,7 +30,7 @@ Locate the 10-pin header associated with your board's k20dx flash. Usually, the 
 ![](images/connected.png "Connecting the debugger to the bricked board")
 
 ### Step 3: Flashing bricked board
-Now you are ready to flash the bricked board with the updated DapLink firmware. This firmware should have already been downloaded previously in the Required items section of this tutorial. To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with path location of the DapLink binary on your system.
+Now you are ready to flash the bricked board with the updated DapLink firmware that is linked in the `Required items` section of this tutorial. To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with file location of the DapLink binary on your system.
 
 `pyocd-flashtool <PATH TO DAPLINK BINARY> -t k20d50m`
 
@@ -63,10 +67,10 @@ INFO:root:Programmed 131072 bytes (128 pages) at 25.32 kB/s
 ```
 
 ### Step 4: Verify
-Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally.
+Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
 
-## Interface recovery
-Follow the steps in this section if the flowchart at the beginning of the document determined that your board's interface has been corrupted.
+## Update with Windows 7
+Follow the steps in this section if the flowchart at the beginning of the document determined that your board is susceptible to bricking.
 
 ### Required items
 * Windows 7 machine
@@ -75,10 +79,10 @@ Follow the steps in this section if the flowchart at the beginning of the docume
 ### Step 1: Enter device into bootloader mode
 Hold down the reset button on your board, and while holding down the button, plug it into a Windows 7 machine. The board should mount as a `BOOTLOADER`.
 
-![](images/bootloader.png "Image of what the bootloader looks like on windows7")
+![](images/bootloader.png "Image of what the bootloader looks like on Windows 7")
 
 ### Step 2: Drag working binary onto your device
 Drag and drop your binary onto the device while it is in bootloader mode.
 
 ### Step 3: Verify
-Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally.
+Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
