@@ -1,9 +1,9 @@
 # Unbricking and Updating mbed Devices
-Older versions of DAPLink can potentially brick your NXP/Freescale microcontroller if you attempt to update its firmware on a Windows 10 machine. This bricking is a result of the device's bootloader getting overwritten improperly during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
+An older version of DAPLink can potentially brick your microcontroller if updated on a Windows 10 machine. We have witnessed the bricking occur on select NXP/Freescale microcontrollers that are packaged with this specific version of DAPLink. The bricking is a result of the device's bootloader getting overwritten improperly during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
 ![](images/flowchart.png "Flowchart used to determine status of bricked board")
 
-If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then this guide does not apply to you, and update your board normally following the directions outlined [here](http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA?tid=vanOpenSDA#overviewExpand).
+If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then you need only to follow the directions in `Step 2: Update firmware` of the `Safely update with Windows 10` section of this guide.
 
 ## Unbricking bootloader
 Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked.
@@ -19,7 +19,7 @@ pyOCD is an Open Source Python 2.7 based library for programming and debugging A
 `pip install pyOCD`
 
 ### Step 2: Connect debugger to bricked board
-Locate the 10-pin header associated with your board's k20dx flash. Usually, the header is near the OpenSDA USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable, as seen in the image below. The pin numbering is printed on the silkscreen of your board for your reference. After you have connected the debugger to your board, ensure that both the debugger and the bricked board are plugged into a power source (usually via USB cable).
+Locate the 10-pin header associated with your board's k20dx flash. Usually, the header is near the OpenSDA USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable, as seen in the image below. The pin numbering is printed on the silkscreen of your board for your reference. After you have connected the debugger to your board, ensure that both the debugger and the bricked board are plugged into your computer via USB cable.
 
 ![](images/header.png "K20dx flash chip and associated 10-pin header. Pin 1 on the header had been circled.")
 
@@ -73,13 +73,15 @@ Follow the steps in this section if the flowchart at the beginning of the docume
 * [DapLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Disable storage services
-Right click the _start button_ in Windows 10, and then left click _run_. From the run prompt, type in ```services.msc```, and then click the _OK_ button.
+Right click the _Start Button_ in Windows 10, and then left click _Run_. Once the run prompt opens, type in ```services.msc``` and click the _OK_ button.
 
 ![](images/run.png "Open up the services application.")
 
-Once the Services application opens, double click the item from the list named _Storage Service_.  Once inside, click the button named _Stop_.
+Once the Services application opens, double click the item from the list named _Storage Service_.  
 
 ![](images/services.png "Look for the setting named "Storage Service".")
+
+Storage Service Properties is now open. Click the button named _Stop_.
 
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
@@ -90,4 +92,4 @@ While holding the board's reset button, connect it to your computer via the boar
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
 
 ### Step 4: Re-enable storage services
-Turn storage services back on by following the same steps listed in step 1, but this time click the button name _Start_ instead of _Stop_.
+Turn storage services back on by following the same steps listed in ```Step 1: Disable storage services```, but this time click the button name _Start_ instead of _Stop_.
