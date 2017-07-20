@@ -1,12 +1,14 @@
-# Unbricking and Updating mbed Devices
-An older version of DAPLink can potentially brick your microcontroller if updated on a Windows 10 machine. We have witnessed the bricking occur on select NXP/Freescale microcontrollers that are packaged with this specific version of DAPLink. The bricking is a result of the device's bootloader getting overwritten improperly during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
+# Unbricking and Updating Corrupted mbed Devices
+An older version of DAPLink can potentially brick your microcontroller if updated on a Windows 10 machine. We have witnessed the bricking occur on select NXP/Freescale microcontrollers that are packaged with this specific version of DAPLink. The bricking is a result of the device's bootloader getting corrupted during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly.
 
-![](images/flowchart.png "Flowchart used to determine status of bricked board")
+Fear not, the procedures used in this document to test if your board is already bricked will NOT cause your board to get bricked. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
-If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then you need only to follow the directions in `Step 2: Update firmware` of the `Safely update with Windows 10` section of this guide.
+![](images/flowchart.png "Flowchart used to determine status of board")
 
-## Unbricking bootloader
-Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked.
+If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking corrupted bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then you need only to follow the directions in `Step 2: Update firmware` of the `Safely update with Windows 10` section of this guide.
+
+## Unbricking corrupted bootloader
+Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked. Alternatively, if you already have access to a [Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), a [P&E Multilink](http://www.pemicro.com/products/product_viewDetails.cfm?product_id=15320137&productTab=1), or a [FRDM Development Board](http://www.nxp.com/products/software-and-tools/hardware-development-tools/freedom-development-boards:FREDEVPLA), you can follow the steps outline in the tutorial found [here](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/). If you follow the said tutorial instead, please recover your board using the _Daplink firmware_ linked in the `Required items` section below.
 
 ### Required items
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
