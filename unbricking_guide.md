@@ -1,20 +1,20 @@
 # Unbricking and Updating Corrupted mbed Devices
-An older version of DAPLink can potentially brick your microcontroller if updated on a Windows 10 machine. We have witnessed the bricking occur on select NXP/Freescale microcontrollers that are packaged with this specific version of DAPLink. The bricking is a result of the device's bootloader getting corrupted during the flashing process. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly.
+An older version of DAPLink can potentially brick your microcontroller if you attempt to update its firmware on a Windows 10 machine. When bricked, the application on your device will no longer execute and the device itself will no longer mount in your OS. The bricking is a result of the device's bootloader getting corrupted during the flashing process. We have witnessed the bricking occur on select NXP/Freescale microcontrollers that are packaged with this specific version of DAPLink. If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly.
 
-Fear not, the procedures used in this document to test if your board is already bricked will NOT cause your board to get bricked. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
+Fear not, the procedures outlined in this document will NOT cause your board to get bricked. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
 ![](images/flowchart.png "Flowchart used to determine status of board")
 
 If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking corrupted bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then you need only to follow the directions in `Step 2: Update firmware` of the `Safely update with Windows 10` section of this guide.
 
 ## Unbricking corrupted bootloader
-Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked. Alternatively, if you already have access to a [Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), a [P&E Multilink](http://www.pemicro.com/products/product_viewDetails.cfm?product_id=15320137&productTab=1), or a [FRDM Development Board](http://www.nxp.com/products/software-and-tools/hardware-development-tools/freedom-development-boards:FREDEVPLA), you can follow the steps outline in the tutorial found [here](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/). If you follow the said tutorial instead, please recover your board using the _Daplink firmware_ linked in the `Required items` section below.
+Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked. Alternatively, if you already have access to a [Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), a [P&E Multilink](http://www.pemicro.com/products/product_viewDetails.cfm?product_id=15320137&productTab=1), or a [FRDM Development Board](http://www.nxp.com/products/software-and-tools/hardware-development-tools/freedom-development-boards:FREDEVPLA), you can follow the steps outline in the tutorial found [here](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/). If you follow said tutorial instead, please recover your board using the _DAPlink firmware_ linked in the `Required items` section below.
 
 ### Required items
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
 * [CMSIS-DAP debugging probe](https://developer.mbed.org/platforms/SWDAP-LPC11U35/).
 * [10 pin debug cable](https://www.adafruit.com/product/1675).
-* [DapLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [DAPLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Install pyOCD
 pyOCD is an Open Source Python 2.7 based library for programming and debugging ARM Cortex-M microcontrollers using the CMSIS-DAP that is linked above in the `Required items` section. In a terminal, you can install pyOCD using the following command (install as superuser if using a Linux machine):
@@ -28,7 +28,7 @@ Locate the 10-pin header associated with your board's k20dx flash. Usually, the 
 ![](images/connected.png "Connecting the debugger to the bricked board")
 
 ### Step 3: Flashing bricked board
-Now you are ready to flash the bricked board with the updated DapLink firmware that is linked in the `Required items` section of this tutorial. To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with file location of the DapLink binary on your system.
+Now you are ready to flash the bricked board with the updated DAPLink firmware that is linked in the `Required items` section of this tutorial. This updated version of DAPLink will properly restore your bricked device and prevent future bricking. To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with file location of the DAPLink binary on your system.
 
 `pyocd-flashtool <PATH TO DAPLINK BINARY> -t k20d50m`
 
@@ -72,7 +72,7 @@ Follow the steps in this section if the flowchart at the beginning of the docume
 
 ### Required items
 * Windows 10 machine
-* [DapLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [DAPLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Disable storage services
 Right click the _Start Button_ in Windows 10, and then left click _Run_. Once the run prompt opens, type in ```services.msc``` and click the _OK_ button.
@@ -88,7 +88,7 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
 ### Step 2: Update firmware
-While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_. Open up the _BOOTLOADER_ directory, and then drag and drop the firmware that is linked in the `Required items` section of this tutorial. The board will begin the updating process.
+While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_. Open up the _BOOTLOADER_ directory, and then drag and drop the firmware that is linked in the `Required items` section of this tutorial. This updated version of DAPLink will properly restore your bricked device and prevent future bricking. The board will begin the updating process.
 
 ### Step 3: Verify
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
