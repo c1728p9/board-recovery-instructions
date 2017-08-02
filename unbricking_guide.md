@@ -5,7 +5,7 @@ Fear not, the procedures outlined in this document will NOT cause your board to 
 
 ![](images/flowchart.png "Flowchart used to determine status of board")
 
-If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking corrupted bootloader`. If the flowchart has determined that your board is _susceptible to bricking_, then follow the steps outlined in the section `Safely update with Windows 10`. Finally, if the flowchart has determined that your board is _safe to update as is_, then you need only to follow the directions in `Step 2: Update firmware` of the `Safely update with Windows 10` section of this guide.
+If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Unbricking corrupted bootloader`. If your device is not bricked, then follow the steps outlined in the section `Safely update with Windows 10`.
 
 ## Unbricking corrupted bootloader
 Follow the steps in this section if the flowchart at the beginning of the document determined that your board's bootloader has been bricked. Alternatively, if you already have access to a [Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), a [P&E Multilink](http://www.pemicro.com/products/product_viewDetails.cfm?product_id=15320137&productTab=1), or a [FRDM Development Board](http://www.nxp.com/products/software-and-tools/hardware-development-tools/freedom-development-boards:FREDEVPLA), you can follow the steps outline in the tutorial found [here](https://mcuoneclipse.com/2016/06/26/how-to-recover-the-opensda-v2-x-bootloader/). If you follow said tutorial instead, please recover your board using the _DAPlink firmware_ linked in the `Required items` section below.
@@ -68,7 +68,7 @@ INFO:root:Programmed 131072 bytes (128 pages) at 25.32 kB/s
 Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
 
 ## Safely update with Windows 10
-Follow the steps in this section if the flowchart at the beginning of the document determined that your board is susceptible to bricking.
+If the flowchart in the beginning of the document sent you to this section, then follow the steps below to safely update your device on a Windows 10 machine.
 
 ### Required items
 * Windows 10 machine
@@ -88,7 +88,7 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
 ### Step 2: Update firmware
-While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_. Open up the _BOOTLOADER_ directory, and then drag and drop the firmware that is linked in the `Required items` section of this tutorial. This updated version of DAPLink will properly restore your bricked device and prevent future bricking. The board will begin the updating process.
+While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_. Open up the _BOOTLOADER_ directory, and then drag and drop the firmware that is linked in the `Required items` section of this tutorial. The board will begin the updating process.
 
 ### Step 3: Verify
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
