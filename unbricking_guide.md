@@ -81,7 +81,7 @@ Right click the _Start Button_ in Windows 10, and then left click _Run_. Once th
 
 Once the Services application opens, double click the item from the list named _Storage Service_.  
 
-![](images/services.png "Look for the setting named "Storage Service".")
+![](images/services.png "Look for the setting named Storage Service.")
 
 Storage Service Properties is now open. Click the button named _Stop_.
 
