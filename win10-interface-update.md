@@ -1,21 +1,23 @@
 # Mbed Enabled boards and Windows 10
-There have been questions asked in the forums about Windows 10 bricking mbed Enabled development boards when updating the interface firmware. We decided to look further into this to understand, reproduce and root cause the problem. The symptom has been described as "bricking" or not mounting as a mass storage drive when connected to the computer over USB. During the investigation, we found the problem and that it could manifest itself in two ways yielding comparable results, the boards appearing to be bricked. In one case, the interface application received out of expected order data and writes it to the device which causes it to crash on reboot. In the second case, the out of order sequence is not handled well and erases the bootloader which does brick the device. While this could happen on any operating system its only manifested on Windows 8 and 10 when storage services are running. The user facing result of this is that updating the DAPLink firmware using a Windows 8 or 10 can potentially have their bootloaders bricked or interface application firmware corrupted causing a software crash where the interface application will no longer execute. We have tracked this down to the following list of NXP/Freescale development boards that are shipped with bootloader version "####". If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly.
+There have been questions asked in the forums about Windows 10 bricking mbed Enabled development boards when updating the interface firmware. We decided to look further into this to understand, reproduce, and find a solution to the problem. The symptom has been described as "bricking" or not mounting as a mass storage drive when connected to the computer over USB. During the investigation, we found that the problem can manifest itself in two different ways, with both cases making the boards appear bricked. In one case, the interface application receives data in an unexpected order and writes it to the device, causing the application to crash on reboot. In the second case, the out of order sequence erases the bootloader, resulting in a bricked device.
+
+While this could happen on any operating system, it has only manifested on Windows 8 and 10 machines when storage services are running. The user facing result of this is that updating DAPLink firmware on a Windows 8 or 10 machine can result in a bricked bootloader or corrupted application interface, both of which will prevent the user's application from running. We have tracked this down to the following list of NXP/Freescale development boards that are shipped with bootloader version "XXXX" (TODO: UDATE THIS BEFORE FINISHING). If you believe your device is bricked, or worried that it may become bricked, this guide will help you in recovering and updating your board properly.
 
 <<insert list of boards and versions here>>
 
 The procedures outlined in this document will NOT leave your board in a unrecoverable state. Begin by following the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
-![](images/flowchart.png "Flowchart used to determine status of board")
+![](images/flowchart.png "Flowchart used to determine status of board.")
 
-If the flowchart has determined that your board is _bricked_, then follow the steps in the section `Reprogramming the bootloader`. If your device is not bricked, then follow the steps outlined in the section `Safely update device`.
+If the flowchart determined that your bootloader is still intact, then follow the steps in the section `Safely update device`. Else, if the flowchart determined that your bootloader was bricked, then follow the steps in the section `Reprogramming the bootloader`.
 
 ## Safely update device
-To recover a board with the bootloader is still intact we just need to reprogram the debug interface application.
+To recover a board which still has its bootloader intact, we just need to reprogram the debug interface application.
 
 ![](images/os_flowchart.png "Determine steps needed to update device.")
 
 ### Required items
-* [DAPLink firmware](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [DAPLink debug application](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Disable storage services
 On your Windows 8/10 machine, press and hold the Windows Logo Key and then press R. This will open the windows _Run_ prompt. Once the _Run_ prompt opens, type in ```services.msc``` and click the _OK_ button.
@@ -31,7 +33,7 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
 ### Step 2: Update debug interface application
-While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with either the name _BOOTLOADER_, _MAINTENANCE_, or something similar. Open up this device's directory, and then drag and drop the [latest DAPLink debug application](Download link for file). The board will begin the updating process.
+While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_, _MAINTENANCE_, or something similar, depending the board you are updating. Open up this device's directory, and then drag and drop the latest [DAPLink debug application](TODO: add download link for file). The board will begin the updating process.
 
 ### Step 3: Verify
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
