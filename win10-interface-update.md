@@ -55,7 +55,7 @@ pyOCD is an Open Source Python based library for programming and debugging ARM C
 `pip install pyOCD`
 
 ### Step 3: Connect debugger to bricked board
-Locate the 10-pin header associated with your bricked board's k20dx interface MCU. Usually, the header is near the OpenSDA USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable. The pin numbering is printed on the silkscreen of your board for your reference.
+Locate the 10-pin header associated with your bricked board's k20dx interface MCU. Usually, the header is near the OpenSDA USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable. The pin numbering is printed on the silkscreen of your board for your reference. I drew a green square around the k20dx interface MCU, and a green circle around pin 1 of its corresponding 10-pin header in the image below.
 
 ![](images/header.png "K20dx flash chip and associated 10-pin header. Pin 1 on the header had been circled.")
 
