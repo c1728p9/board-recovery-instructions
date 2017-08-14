@@ -5,24 +5,24 @@ If you believe your device is bricked or corrupted, or worried that it may becom
 
 ![](images/flowchart.png "Flowchart used to determine status of board.")
 
-If the flowchart determined that your bootloader is still intact, then follow the steps in the section `Safely update device`. Else, if the flowchart determined that your bootloader was bricked, then follow the steps in the section `Reprogramming the bootloader`.
+If the flowchart determined that your bootloader is safe, then your board is not susceptible to the bricking/corruption issues discussed earlier, and this guide is not relevant your board. If the flowchart determined that your bootloader is still intact but outdated, then follow the steps in the section `Safely update device`. Else, if the flowchart determined that your bootloader was bricked, then follow the steps in the section `Reprogramming the bootloader`.
 
 ## Checking interface and bootloader versions
 We have determined that NXP/Freescale development boards containing bootloader version 1000 are susceptible for bricking. NXP/Freescale development boards containing interface version below 0240 are susceptible to having their interfaces corrupted. We are uncertain of all the boards and their revisions that came packaged with these versions, but either way, it is always recommended to update your board to use the latest versions. This section will explain the steps needed to check your board's current interface and bootloader version numbers.
 
 ### Checking interface version
-Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the DETAILS.TXT file. If that file is not present, then open up the MBED.HTM file with a text editor.
+Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the `DETAILS.TXT` file. If that file is not present, then open up the `.HTM` file with a text editor.
 
 ### Checking bootloader version
-Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the included .htm file with a text editor.
+Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.HTM` file with a text editor.
 
 ## Safely update device
-To recover a board which still has its bootloader intact, we just need to reprogram the debug interface application.
+This section will recover and update boards that have an outdated bootloader. To do this, we just need to reprogram the debug interface application, which will subsequently update the bootloader as well. To determine the next steps, please follow the flowchart below.
 
 ![](images/os_flowchart.png "Determine steps needed to update device.")
 
 ### Required items
-* [DAPLink debug application](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [DAPLink interface firmware zip package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Disable storage services
 On your Windows 8/10 machine, press and hold the Windows Logo Key and then press R. This will open the windows _Run_ prompt. Once the _Run_ prompt opens, type in ```services.msc``` and click the _OK_ button.
@@ -38,7 +38,9 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
 ### Step 2: Update interface application
-While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount with the name _BOOTLOADER_, _MAINTENANCE_, or something similar, depending the board you are updating. Open up this device's directory, and then drag and drop the latest [DAPLink interface application](TODO: add download link for file). The board will begin the updating process.
+If you have not done so already, download the [DAPLink interface firmware zip package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED). When you unzip the package, locate the file which contains the name of the board you are trying to update. This will be the file used to update your device.
+
+While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. The device should mount in its bootloader mode. Open up the device's root directory, and then drag and drop the firmware update into this directory. The board will begin the updating process.
 
 ### Step 3: Verify
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
@@ -47,14 +49,14 @@ Allow the update a few seconds to complete, and then unplug and replug the board
 Turn storage services back on by following the same steps listed in ```Step 1: Disable storage services```, but this time click the button name _Start_ instead of _Stop_.
 
 ## Reprogramming the bootloader
-If your bootloader has been partially erased we can use a debugger to reprogram an updated bootloader.
+If your bootloader has been bricked, we can use a debugger to reprogramming it. After the bootloader has been reprogramming, all that remains is updating its interface. Begin by following the steps below.
 
 ### Required items
 * Debugger (Step 1 below will discuss various options available).
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
 * [10 pin debug cable](https://www.adafruit.com/product/1675).
 * [DAPLink bootloader](TODO: add download link for file).
-* [DAPLink interface application](TODO: add download link for file)
+* [DAPLink interface firmware zip package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
 
 ### Step 1: Acquire a debugger
 There are a few different options here when it comes to using the debugger to reprogram your bootloader. One option is to use a [CMSIS-DAP](https://developer.mbed.org/platforms/SWDAP-LPC11U35/) debugging probe. Alternatively, it is possible to use another FRDM board to program your bricked board. Depending on the board, a SWD header needs to be soldered on the board and jumpers set or traces cut. Here are some tutorials on how to modify the [FRDM-K64F](https://mcuoneclipse.com/2015/09/08/using-frdm-k64f-board-to-debug-another-kinetis-board/), [FRDM-KL25Z](https://mcuoneclipse.com/2013/04/21/using-the-freedom-board-as-jtag-programmer/), and [FRDM-KL43Z](https://mcuoneclipse.com/2015/08/19/using-the-freescale-freedom-frdm-kl43z-to-debug-other-boards/) to do just that.
@@ -110,7 +112,9 @@ INFO:root:Programmed 131072 bytes (128 pages) at 25.32 kB/s
 ```
 
 ### Step 5: Update interface application
-The bootloader should now be updated. Next you will update your board's interface. While holding the board's reset button, connect it to your computer via the board's OpenSDA UDB port. A device will mount as _MAINTENANCE_. Open up this device's directory, and then drag and drop the latest [DAPLink interface application](TODO: add download link for file). The board will begin the updating process and should complete after a few seconds.
+The bootloader should now be updated. Next you will update your board's interface. If you have not done so already, download the [DAPLink interface firmware zip package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED). When you unzip the package, locate the file which contains the name of the board you are trying to update. This will be the file used to update your device.
+
+While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory, and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds.
 
 ### Step 6: Verify
 Now, unplug and replug the board into your computer normally (without holding down the reset button). The device mounts normally, and the update is complete.
