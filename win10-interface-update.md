@@ -14,7 +14,7 @@ We have determined that NXP/Freescale development boards containing bootloader v
 Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the `DETAILS.TXT` file. If that file is not present, then open up the `.HTM` file with a text editor.
 
 ### Checking bootloader version
-Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.HTM` file with a text editor.
+Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.htm` file with a text editor.
 
 ## Safely update device
 This section will recover and update boards that have an outdated bootloader. To do this, we just need to reprogram the debug interface application, which will subsequently update the bootloader as well. To determine the next steps, please follow the flowchart below.
@@ -49,7 +49,7 @@ Allow the update a few seconds to complete, and then unplug and replug the board
 Turn storage services back on by following the same steps listed in ```Step 1: Disable storage services```, but this time click the button name _Start_ instead of _Stop_.
 
 ## Reprogramming the bootloader
-If your bootloader has been bricked, we can use a debugger to reprogramming it. After the bootloader has been reprogramming, all that remains is updating its interface. Begin by following the steps below.
+If your bootloader has been bricked, we can use a debugger to reprogram it. After the bootloader has been reprogramming, all that remains is updating its interface. Begin by following the steps below.
 
 ### Required items
 * Debugger (Step 1 below will discuss various options available).
