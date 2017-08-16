@@ -5,24 +5,24 @@ If you believe your device is bricked or corrupted, or worried that it may becom
 
 ![](images/flowchart.png "Flowchart used to determine necessary update steps.")
 
-If the flowchart determined that your bootloader is still intact, but outdated, then begin by following the steps in the section `Safely update outdated bootloader`. If the flowchart determined that your bootloader was bricked, then begin by following the steps in the section `Reprogramming a bricked bootloader`. Else, if the flowchart determined that your bootloader is safe for interface updates, then your board is not susceptible to the bricking/corruption issues discussed earlier, and interface updates can be completed by following section `Normal interface update procedures` found at the bottom of this guide.
+If the flowchart determined that your bootloader is still intact, but outdated, then begin by following the steps in the section `Safely update outdated bootloader`. If the flowchart determined that your bootloader was bricked, then begin by following the steps in the section `Reprogramming a bricked bootloader`. Else, if the flowchart determined that your bootloader is safe for interface updates, then your board is not susceptible to the bricking/corruption issues discussed earlier, and interface updates can be completed by following the steps in the section `Normal interface update procedures`, found at the bottom of this guide.
 
 ## Versions susceptible to bricking and corruption
 This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. We have determined that NXP/Freescale development boards containing bootloader version 1000 are susceptible for bricking. NXP/Freescale development boards containing interface version below 0240 are susceptible to having their interfaces corrupted. We are uncertain of all the boards and their revisions that came packaged with these versions, but either way, it is always recommended to update your board to use the latest versions. The remaining portions of this section will explain the steps needed to check your board's current interface and bootloader versions. When finished with this section, please continue to the flowchart found at the beginning of this guide to determine your next steps.
 
 ### Checking interface version
-Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the `DETAILS.TXT` file. If that file is not present, then open up the `.HTM` file with a text editor.
+Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the `DETAILS.TXT` file found at the root directory of the device. If that file is not present, then open up the `.HTM` file with a text editor.
 
 ### Checking bootloader version
 Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.htm` file with a text editor.
 
 ## Safely update outdated bootloader
-If you were directed to this section, then your board has an outdated bootloader. This section will show you how to safely update your outdated bootloader, and then will direct you how to update to the latest interface firmware. Begin by following the flowchart below.
+If you were directed to this section, then your board has an outdated bootloader. This section will show you how to safely update your outdated bootloader, and then will direct you on how to update to the latest interface firmware. Begin by following the flowchart below.
 
-![](images/os_flowchart.png "Determine steps needed to update device.")
+![](images/os_flowchart.png "Determine steps needed to update your device's bootloader.")
 
 ### Required items
-* [Updated DAPLink bootloader package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [Updated DAPLink bootloader package](TODO: This should link to the 0244 package which has the bootloader update embedded into the interface update).
 
 ### Step 1: Disable storage services (for Windows 8/10 machines only)
 On your Windows 8 or Windows 10 machine, press and hold the Windows Logo Key and then press R. This will open the windows _Run_ prompt. Once the _Run_ prompt opens, type in ```services.msc``` and click the _OK_ button.
@@ -38,7 +38,7 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ![](images/stop.png "Storage Service settings with the Stop button highlighted.")
 
 ### Step 2: Update the bootloader
-If you have not done so already, download the [Updated DAPLink bootloader package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED). When you unzip the package, locate the file which contains the name of the board you are trying to update. This will be the file used to update your device.
+If you have not done so already, download the [Updated DAPLink bootloader package](TODO: This should link to the 0244 package which has the bootloader update embedded into the interface update). When you unzip the package, locate the file which contains the name of the board you are trying to update. This will be the file used to update your device.
 
 While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. The device should mount in its bootloader mode. Open up this device's root directory, and then drag and drop the firmware update into this directory. The board will begin the updating process.
 
@@ -54,8 +54,7 @@ If you were directed to this section, then your bootloader has been bricked and 
 * Debugger (Step 1 below will discuss various options available).
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
 * [10 pin debug cable](https://www.adafruit.com/product/1675).
-* [DAPLink bootloader](TODO: add download link for file).
-* [DAPLink interface firmware zip package](TODO: NEED TO UPDATE ONCE NEW DAPLINK IS RELEASED).
+* [updated DAPLink bootloader](TODO: Link updated 0244-k20dx bootloader file here).
 
 ### Step 1: Acquire a debugger
 There are a few different options here when it comes to using the debugger to reprogram your bootloader. One option is to use a [CMSIS-DAP](https://developer.mbed.org/platforms/SWDAP-LPC11U35/) debugging probe. Alternatively, it is possible to use another FRDM board to program your bricked board. Depending on the board, a SWD header needs to be soldered on the board and jumpers set or traces cut. Here are some tutorials on how to modify the [FRDM-K64F](https://mcuoneclipse.com/2015/09/08/using-frdm-k64f-board-to-debug-another-kinetis-board/), [FRDM-KL25Z](https://mcuoneclipse.com/2013/04/21/using-the-freedom-board-as-jtag-programmer/), and [FRDM-KL43Z](https://mcuoneclipse.com/2015/08/19/using-the-freescale-freedom-frdm-kl43z-to-debug-other-boards/) to do just that.
@@ -69,12 +68,12 @@ Locate the 10-pin header associated with your bricked board's k20dx interface MC
 
 ![](images/header.png "K20dx flash chip and associated 10-pin header. Pin 1 on the header had been circled.")
 
-After this, connect the debugger to your bricked board. Ensure that both the debugger and the bricked board are plugged into your computer via USB cable so that they have power. Below is an example of using a FRDM-K64F as a debugger to reprogram a bricked FRDM-K22F.
+After this, connect the debugger to your bricked board. Ensure that both the debugger and the bricked board are plugged into your computer via USB cable so that they have power. The image below is an example of how to use a FRDM-K64F as a debugger to reprogram a bricked FRDM-K22F.
 
 ![](images/connected.png "Using a FRDM-K64F as a debugger to reprogram a bricked FRDM-K22F.")
 
 ### Step 4: Flashing the updated bootloader
-Now you are ready to flash the board with the [updated DAPLink bootloader](TODO: Link bootloader file here). To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with file location of the DAPLink binary on your system.
+Now you are ready to flash the board with the [updated DAPLink bootloader](TODO: Link updated 0244-k20dx bootloader file here). To run pyOCD's flashtool, use the command below (run with superuser privileges if using a Linux machine). Note, replace `<PATH TO DAPLINK BINARY>` with file location of the DAPLink binary on your system.
 
 `pyocd-flashtool <PATH TO DAPLINK BINARY> -t k20d50m`
 
