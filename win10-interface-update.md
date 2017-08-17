@@ -3,6 +3,8 @@ There have been questions asked in the forums about Windows 10 bricking mbed Ena
 
 If you believe your device is bricked or corrupted, or worried that it may become bricked or corrupted, this guide will help you update your board properly. After performing the update, your board should no longer be susceptible to bricking/corruption from the reasons explained in the paragraph above. Also, the procedures outlined in this document will NOT leave your board in a unrecoverable state. We have narrowed down specific versions that are susceptible to corruption and bricking, and if interested, more information on that can be found below in the section `Versions susceptible to bricking and corruption`. The next step is to follow the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
+## <a name="testanchor"></a>Test anchor heading
+
 ![](images/flowchart.png "Flowchart used to determine necessary update steps.")
 
 If the flowchart determined that your bootloader is still intact, but outdated, then begin by following the steps in the section `Safely update outdated bootloader`. If the flowchart determined that your bootloader was bricked, then begin by following the steps in the section `Reprogramming a bricked bootloader`. Else, if the flowchart determined that your bootloader is safe for interface updates, then your board is not susceptible to the bricking/corruption issues discussed earlier, and interface updates can be completed by following the steps in the section `Normal interface update procedures`, found at the bottom of this guide.
@@ -115,3 +117,5 @@ Once the reprogramming is complete, the bootloader will now be updated. The next
 If you were directed to this section, then your board has the updated bootloader in place and your device is no longer susceptible to the bricking/corruption issues explained at the beginning of this guide. At this point, normal interface update procedures can be followed. To update to the latest interface firmware, you will need to download the most recent DAPLink release package found at [DAPLink's github page](https://github.com/mbedmicro/DAPLink/releases). On this page, locate the most up-to-date release package and then download and unzip the package. After unzipping, find the file containing the name of the board you are trying to update. This will be the file used to update your device's interface.
 
 While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
+
+[Test link to anchor](#testanchor)
