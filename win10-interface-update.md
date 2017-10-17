@@ -131,8 +131,6 @@ While holding the board's reset button, connect it to your computer via the boar
 ## <a name="versions"></a>Information about versions susceptible to problems
 This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. 
 
-### Susceptible bootloaders
-
 Development boards that do not mount as "MAINTENANCE" when in bootloader mode may be susceptible to corruption.  
 
 Additionally, bootloaders with version 1000 are susceptible to bricking.  To check your bootloader version see the following section.  
