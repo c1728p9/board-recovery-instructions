@@ -1,20 +1,24 @@
-# Mbed Enabled boards and Windows 10
-There have been questions asked in the forums about Windows 10 bricking mbed Enabled development boards when updating the interface firmware. We looked further into this to understand, reproduce, and find a solution to the problem. The symptom has been described as "bricking" or not mounting as a mass storage drive when connected to the computer over USB. During the investigation, we found that the problem can manifest itself in two different ways, with both cases making the boards appear bricked. In one case, the interface application receives data in an unexpected order causing the application to crash on reboot. In the second case, the out of order sequence erases the bootloader, resulting in a bricked device. While this could happen on any operating system, it has only manifested on Windows 8 and Windows 10 machines when storage services are running. The user facing result of this is that updating DAPLink firmware on a Windows 8 or Windows 10 machine can result in a bricked bootloader or corrupted application interface, both of which will prevent the user's application from running.
+# Addressing issues with Mbed Enabled boards and Windows 10
+There have been questions asked in the forums about Windows 10 bricking mbed Enabled development boards when updating the interface firmware. We looked further into this to understand, reproduce, and find a solution to the problem. The symptom has been described as "bricking" or not mounting as a mass storage drive when connected to the computer over USB. During the investigation, we found that the problem can manifest itself in two different ways, with both cases making the boards appear bricked. 
 
-If you believe your device is bricked or corrupted, or worried that it may become bricked or corrupted, this guide will help you update your board properly. After performing the update, your board should no longer be susceptible to bricking/corruption from the reasons explained in the paragraph above. Also, the procedures outlined in this document will NOT leave your board in a unrecoverable state. We have narrowed down specific versions that are susceptible to corruption and bricking, and if interested, more information on that can be found below in the section [Versions susceptible to bricking and corruption](#versions). The next step is to follow the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
+* In one case, the debug interface application receives data in an unexpected order causing the debug interface application to crash on boot.  We categorize this as a corrupted state.  The board can be recovered by updating the debug interface firmware.  
+
+* In the second case, the out of order sequence erases the bootloader.  We categorize this as a bricked device.  The board can be recovered by flashing a new bootloader. 
+
+While this could happen on any operating system, it has only manifested on Windows 8 and Windows 10 machines when storage services are running. If you believe your device is bricked or corrupted, or worried that it may become bricked or corrupted, this guide will help you update your board properly. After performing the update, your board should no longer be susceptible to bricking/corruption from the reasons explained in the paragraph above. 
+
+We have narrowed down specific versions that are susceptible to corruption and bricking, and if interested, more information on that can be found below in the section [Information about versions susceptible to problems](#versions). 
+
+The first step is to follow the flowchart below to determine what needs to be done to recover and/or safely update the DAPLink firmware on your board.
 
 <a name="flowchart">![](images/flowchart.png "Flowchart used to determine necessary update steps.")
 
-If the flowchart determined that your bootloader is still intact, but outdated, then begin by following the steps in the section [Safely update outdated bootloader](#outdated). If the flowchart determined that your bootloader was bricked, then begin by following the steps in the section [Reprogramming a bricked bootloader](#bricked). Else, if the flowchart determined that your bootloader is safe for interface updates, then your board is not susceptible to the bricking/corruption issues discussed earlier, and interface updates can be completed by following the steps in the section [Normal interface update procedures](#normal_update), found at the bottom of this guide.
+If the flowchart determined that your bootloader is still intact, but outdated, then begin by following the steps in the section [Safely update outdated bootloader](#outdated). 
 
-## <a name="versions"></a>Versions susceptible to bricking and corruption
-This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. We have determined that NXP/Freescale development boards containing bootloader version 1000 are susceptible for bricking. NXP/Freescale development boards containing interface version below 0240 are susceptible to having their interfaces corrupted. We are uncertain of all the boards and their revisions that came packaged with these versions, but either way, it is always recommended to update your board to use the latest versions. The remaining portions of this section will explain the steps needed to check your board's current interface and bootloader versions. When finished with this section, please continue to the [flowchart](#flowchart) found at the beginning of this guide to determine your next steps.
+If the flowchart determined that your bootloader was bricked, then begin by following the steps in the section [Reprogramming a bricked bootloader](#bricked). 
 
-### Checking interface version
-Assuming your board's interface is not yet corrupted, you can check its interface version number by plugging your board into your computer via the board's OpenSDA USB port, and then opening up the `DETAILS.TXT` file found at the root directory of the device. If that file is not present, then open up the `.HTM` file with a text editor.
+Else, if the flowchart determined that your bootloader is safe for interface updates, then your board is not susceptible to the bricking issue discussed earlier, and interface updates can be completed by following the steps in the section [Normal interface update procedures](#normal_update), found at the bottom of this guide.
 
-### Checking bootloader version
-Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's OpenSDA USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.htm` file with a text editor.
 
 ## <a name="outdated"></a>Safely update outdated bootloader
 If you were directed to this section, then your board has an outdated bootloader. This section will show you how to safely update your outdated bootloader, and then will direct you on how to update to the latest interface firmware. Begin by following the flowchart below.
@@ -40,7 +44,7 @@ Storage Service Properties is now open. Click the button named _Stop_.
 ### Step 2: Update the bootloader
 If you have not done so already, download the [Updated DAPLink bootloader package](TODO: This should link to the 0244 package which has the bootloader update embedded into the interface update). When you unzip the package, locate the file which contains the name of the board you are trying to update. This will be the file used to update your device.
 
-While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. The device should mount in its bootloader mode. Open up this device's root directory, and then drag and drop the firmware update into this directory. The board will begin the updating process.
+While holding the board's reset button, connect it to your computer via the board's debug USB port. The device should mount in its bootloader mode. Open up this device's root directory, and then drag and drop the firmware update into this directory. The board will begin the updating process.
 
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). You device now has the updated bootloader, and the will mount normally. If you are using a Windows 8 or Windows 10 machine, continue to the next step, [Step 3: Re-enable storage services](#step3). If you are updating on some other operating system, then jump straight to the section [Normal interface update procedures](#normal_update) found at the end of this guide.
 
@@ -56,7 +60,7 @@ If you were directed to this section, then your bootloader has been bricked and 
 * [10 pin debug cable](https://www.adafruit.com/product/1675).
 * [updated DAPLink bootloader](TODO: Link updated 0244-k20dx bootloader file here).
 
-### Step 1: Acquire a debugger
+### Step 1: Acquire an external debug interface pod
 There are a few different options here when it comes to using the debugger to reprogram your bootloader. One option is to use a [CMSIS-DAP](https://developer.mbed.org/platforms/SWDAP-LPC11U35/) debugging probe. Alternatively, it is possible to use another FRDM board to program your bricked board. Depending on the board, a SWD header needs to be soldered on the board and jumpers set or traces cut. Here are some tutorials on how to modify the [FRDM-K64F](https://mcuoneclipse.com/2015/09/08/using-frdm-k64f-board-to-debug-another-kinetis-board/), [FRDM-KL25Z](https://mcuoneclipse.com/2013/04/21/using-the-freedom-board-as-jtag-programmer/), and [FRDM-KL43Z](https://mcuoneclipse.com/2015/08/19/using-the-freescale-freedom-frdm-kl43z-to-debug-other-boards/) to do just that.
 
 ### Step 2: Install pyOCD
@@ -64,7 +68,7 @@ pyOCD is an Open Source Python based library for programming and debugging ARM C
 `pip install pyOCD`
 
 ### Step 3: Connect debugger to bricked board
-Locate the 10-pin header associated with your bricked board's k20dx interface MCU. Usually, the header is near the OpenSDA USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable. The pin numbering is printed on the silkscreen of your board for your reference. In the image below, I drew a green square around the k20dx interface MCU found on a bricked FRDM-K22F, and a green circle around pin 1 of its corresponding 10-pin header.
+Locate the 10-pin header associated with your bricked board's k20dx interface MCU. Usually, the header is near the debug USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable. The pin numbering is printed on the silkscreen of your board for your reference. In the image below, I drew a green square around the k20dx interface MCU found on a bricked FRDM-K22F, and a green circle around pin 1 of its corresponding 10-pin header.
 
 ![](images/header.png "K20dx flash chip and associated 10-pin header. Pin 1 on the header had been circled.")
 
@@ -112,6 +116,27 @@ INFO:root:Programmed 131072 bytes (128 pages) at 25.32 kB/s
 Once the reprogramming is complete, the bootloader will now be updated. The next step is to update your device's interface. Follow the steps in the section [Normal interface update procedures](#normal_update) found below.
 
 ## <a name="normal_update"></a>Normal interface update procedures
-If you were directed to this section, then your board has the updated bootloader in place and your device is no longer susceptible to the bricking/corruption issues explained at the beginning of this guide. At this point, normal interface update procedures can be followed. To update to the latest interface firmware, you will need to download the most recent DAPLink release package found at [DAPLink's github page](https://github.com/mbedmicro/DAPLink/releases). On this page, locate the most up-to-date release package and then download and unzip the package. After unzipping, find the file containing the name of the board you are trying to update. This will be the file used to update your device's interface.
+If you were directed to this section, then your board has the updated bootloader in place and your device is no longer susceptible to the bricking issues explained at the beginning of this guide. At this point, normal interface update procedures can be followed. 
 
-While holding the board's reset button, connect it to your computer via the board's OpenSDA USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
+### Required items
+* None
+
+### Step 1: Download the latest DAPLink release package
+To update to the latest interface firmware, you will need to download the most recent DAPLink release package found at [DAPLink's github page](https://github.com/mbedmicro/DAPLink/releases). On this page, locate the most up-to-date release package and then download and unzip the package. After unzipping, find the file containing the name of the board you are trying to update. This will be the file used to update your device's interface.
+
+### Step 2: Update the debug interface application
+While holding the board's reset button, connect it to your computer via the board's debug USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
+
+
+## <a name="versions"></a>Information about versions susceptible to problems
+This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. 
+
+### Susceptible bootloaders
+
+Development boards that do not mount as "MAINTENANCE" when in bootloader mode may be susceptible to corruption.  
+
+Additionally, bootloaders with version 1000 are susceptible to bricking.  To check your bootloader version see the following section.  
+
+
+#### Checking bootloader version
+Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's debug USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the `DETAILS.TXT` file. If that file is not present, then open up the `.htm` file with a text editor.
