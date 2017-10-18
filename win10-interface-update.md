@@ -1,4 +1,6 @@
-# Addressing issues with Mbed Enabled boards and Windows 10
+# Bootloader update for DAPLink
+Arm Mbed DAPLink is a open source software application used to debug Arm based embedded systems at no cost. Commonly referred to as interface firmware, DAPLink runs on Arm based microcontrollers and creates a bridge between your development computer and the microcontrollers debug access port. DAPLink provides drag-and-drop programming, a serial port and debugging support.
+
 There have been questions asked in the forums about Windows 10 bricking mbed Enabled development boards when updating the interface firmware. We looked further into this to understand, reproduce, and find a solution to the problem. The symptom has been described as "bricking" or not mounting as a mass storage drive when connected to the computer over USB. During the investigation, we found that the problem can manifest itself in two different ways, with both cases making the boards appear bricked. 
 
 * In one case, the debug interface application receives data in an unexpected order causing the debug interface application to crash on boot.  We categorize this as a corrupted state.  The board can be recovered by updating the debug interface firmware.  
