@@ -138,6 +138,35 @@ To update to the latest interface firmware, you will need to download the most r
 While holding the board's reset button, connect it to your computer via the board's debug USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
 
 
+## Firmware update table
+| Board                     | Update Firmware                                   | Recovery Image                                |
+| ------------------------- | ------------------------------------------------- | ----------------------------------------------|
+| Nordic-nRF51-DK           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
+| Nordic-nRF52-DK           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
+| Nordic-nRF51-Dongle       | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
+| Nordic-nRF51822           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
+| FRDM-K64F                 | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
+| FRDM-KL82Z                | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
+| RedBearLab-nRF51822       | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
+| RedBearLab-BLE-Nano       | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
+| FRDM-K22F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-K28F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-K82F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-KW24D                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-KL28Z                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| TWR-KL28Z                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-KE15Z                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| TWK-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| HVP-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| MTS-xDot-L151CC           | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+| FRDM-K20DX                | NA                                                | NA                                            |
+| FRDM-KL05Z                | NA                                                | NA                                            |
+| FRDM-KL25Z                | NA                                                | NA                                            |
+| FRDM-KL26Z                | NA                                                | NA                                            |
+| FRDM-KL27Z                | NA                                                | NA                                            |
+| FRDM-KL43Z                | NA                                                | NA                                            |
+| FRDM-KL46Z                | NA                                                | NA                                            |
+
 ## <a name="versions"></a>Information about versions susceptible to problems
 This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. 
 
