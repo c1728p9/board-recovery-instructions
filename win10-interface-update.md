@@ -30,18 +30,18 @@ If you were directed to this section, then your board has an outdated bootloader
 {{/media/uploads/c1728p9/os_flowchart.png|Determine steps needed to update your device's bootloader.}}
 
 === Required items ===
-* [Updated DAPLink bootloader package](TODO: This should link to the 0244 package which has the bootloader update embedded into the interface update).
+* Updated DAPLink bootloader update image - see the table below to find the relevent firmware
 
 === <a name="step1"></a>Step 1: Disable storage services (for Windows 8/10 machines only) ===
-On your Windows 8 or Windows 10 machine, press and hold the Windows Logo Key and then press R. This will open the windows _Run_ prompt. Once the _Run_ prompt opens, type in {{{services.msc}}} and click the _OK_ button.
+On your Windows 8 or Windows 10 machine, press and hold the Windows Logo Key and then press R. This will open the windows //Run// prompt. Once the //Run// prompt opens, type in {{{services.msc}}} and click the //OK// button.
 
 {{/media/uploads/c1728p9/run.png|Open up the services application.}}
 
-Once the Services application opens, double click the item from the list named _Storage Service_.  
+Once the Services application opens, double click the item from the list named //Storage Service//.  
 
 {{/media/uploads/c1728p9/services.png|Look for the setting named Storage Service.}}
 
-Storage Service Properties is now open. Click the button named _Stop_.
+Storage Service Properties is now open. Click the button named //Stop//.
 
 {{/media/uploads/c1728p9/stop.png|Storage Service settings with the Stop button highlighted.}}
 
@@ -53,7 +53,7 @@ While holding the board's reset button, connect it to your computer via the boar
 Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). You device now has the updated bootloader, and the will mount normally. If you are using a Windows 8 or Windows 10 machine, continue to the next step, [Step 3: Re-enable storage services](#step3). If you are updating on some other operating system, then jump straight to the section [Normal interface update procedures](#normal_update) found at the end of this guide.
 
 === <a name="step3"></a>Step 3: Re-enable storage services (for Windows 8/10 machines only) ===
-On your Windows 8 or Windows 10 machine, turn storage services back on by following the same steps listed in [Step 1: Disable storage services](#step1), but this time click the button name _Start_ instead of _Stop_. After that, follow the steps in the section [Normal interface update procedures](#normal_update) found at the end of this guide.
+On your Windows 8 or Windows 10 machine, turn storage services back on by following the same steps listed in [Step 1: Disable storage services](#step1), but this time click the button name //Start// instead of //Stop//. After that, follow the steps in the section [Normal interface update procedures](#normal_update) found at the end of this guide.
 
 == <a name="bricked"></a>Reprogramming a bricked bootloader ==
 If you were directed to this section, then your bootloader has been bricked and will require a debugger to reprogram it. After the bootloader has been reprogrammed, all that remains is updating its interface. Begin by following the steps below.
@@ -125,13 +125,13 @@ Once the reprogramming is complete, the bootloader will now be updated. The next
 If you were directed to this section, then your board has the updated bootloader in place and your device is no longer susceptible to the bricking issues explained at the beginning of this guide. At this point, normal interface update procedures can be followed. 
 
 === Required items ===
-* [updated DAPLink firmware package](TODO: Link updated 0244 release here).
+* [[https://github.com/mbedmicro/DAPLink/releases/tag/0244|updated DAPLink firmware package]].
 
 === Step 1: Download the latest DAPLink release package ===
 To update to the latest interface firmware, you will need to download the most recent DAPLink release package found at [[https://github.com/mbedmicro/DAPLink/releases|DAPLink's github page]]. On this page, locate the most up-to-date release package and then download and unzip the package. After unzipping, find the file containing the name of the board you are trying to update. This will be the file used to update your device's interface.
 
 === Step 2: Update the debug interface application ===
-While holding the board's reset button, connect it to your computer via the board's debug USB port. A device will mount as _MAINTENANCE_. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
+While holding the board's reset button, connect it to your computer via the board's debug USB port. A device will mount as //MAINTENANCE//. Open up the device's root directory and then drag and drop the firmware update into this directory. The board will begin the updating process and should complete after a few seconds. Now, unplug and replug the board into your computer normally (without holding down the reset button). The device will mount, and the update is complete.
 
 
 == Firmware update table ==
