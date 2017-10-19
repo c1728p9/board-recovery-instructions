@@ -30,7 +30,7 @@ If you were directed to this section, then your board has an outdated bootloader
 {{/media/uploads/c1728p9/os_flowchart.png|Determine steps needed to update your device's bootloader.}}
 
 === Required items ===
-* Updated DAPLink bootloader update image - see the table below to find the relevent firmware
+* DAPLink bootloader update image - see the table below to find the relevent firmware
 
 === <a name="step1"></a>Step 1: Disable storage services (for Windows 8/10 machines only) ===
 On your Windows 8 or Windows 10 machine, press and hold the Windows Logo Key and then press R. This will open the windows //Run// prompt. Once the //Run// prompt opens, type in {{{services.msc}}} and click the //OK// button.
@@ -137,25 +137,25 @@ While holding the board's reset button, connect it to your computer via the boar
 == Firmware update table ==
 The following list of boards may have an old bootloader and are recommended to update.  Please note that this is not an exhaustive list and there could be others.   
 
-|=Board                     |=Update Firmware                                   |=Recovery Image                                |
-| Nordic-nRF51-DK           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
-| Nordic-nRF52-DK           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
-| Nordic-nRF51-Dongle       | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
-| Nordic-nRF51822           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
-| FRDM-K64F                 | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
-| FRDM-KL82Z                | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
-| RedBearLab-nRF51822       | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
-| RedBearLab-BLE-Nano       | 0244_k20dx_bootloader_update_0x5000.bin           | bootloader_bin/0244_k20dx_bl_0x5000.bin       |
-| FRDM-K22F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-K28F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-K82F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-KW24D                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-KL28Z                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| TWR-KL28Z                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-KE15Z                | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| TWK-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| HVP-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| MTS-xDot-L151CC           | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
+|=Board                     |=Update Firmware                                                                                                   |=Recovery Image                                                                    |
+| Nordic-nRF51-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF52-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF51-Dongle       | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF51822           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| FRDM-K64F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| FRDM-KL82Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| RedBearLab-nRF51822       | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| RedBearLab-BLE-Nano       | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| FRDM-K22F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-K28F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-K82F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KW24D                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KL28Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| TWR-KL28Z                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KE15Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| TWK-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| HVP-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| MTS-xDot-L151CC           | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
 
 
 == <a name="versions"></a>Information about versions susceptible to problems ==
@@ -167,4 +167,4 @@ Additionally, bootloaders with version 1000 are susceptible to bricking.  To che
 
 
 ==== Checking bootloader version ====
-Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's debug USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the {{{DETAILS.TXT}}} file. If that file is not present, then open up the `.htm` file with a text editor.
+Assuming your board's bootloader is not yet bricked, you can check its version number by doing the following. While holding down the board's reset button, plug the device into your computer via the board's debug USB port. If your board is not already bricked, a device will mount.  Inside the root directory of that device, the version number can be found by opening the {{{DETAILS.TXT}}} file. If that file is not present, then open up the {{{.htm}}} file with a text editor.
