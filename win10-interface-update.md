@@ -65,7 +65,7 @@ On your Windows 8 or Windows 10 machine, turn storage services back on by follow
 If you were directed to this section, then your bootloader has been bricked and will require a debugger to reprogram it. After the bootloader has been reprogrammed, all that remains is updating its interface. Begin by following the steps below.
 
 ### Required items
-* Debugger (Step 1 below will discuss various options available).
+* Debug interface pod (Step 1 below will discuss various options available).
 * [pyOCD](https://github.com/mbedmicro/pyOCD).
 * [10 pin debug cable](https://www.adafruit.com/product/1675).
 * [updated DAPLink bootloader](TODO: Link updated 0244-k20dx bootloader file here).
@@ -129,7 +129,7 @@ Once the reprogramming is complete, the bootloader will now be updated. The next
 If you were directed to this section, then your board has the updated bootloader in place and your device is no longer susceptible to the bricking issues explained at the beginning of this guide. At this point, normal interface update procedures can be followed. 
 
 ### Required items
-* None
+* [updated DAPLink firmware package](TODO: Link updated 0244 release here).
 
 ### Step 1: Download the latest DAPLink release package
 To update to the latest interface firmware, you will need to download the most recent DAPLink release package found at [DAPLink's github page](https://github.com/mbedmicro/DAPLink/releases). On this page, locate the most up-to-date release package and then download and unzip the package. After unzipping, find the file containing the name of the board you are trying to update. This will be the file used to update your device's interface.
@@ -139,6 +139,8 @@ While holding the board's reset button, connect it to your computer via the boar
 
 
 ## Firmware update table
+The following list of boards may have an old bootloader and are recommended to update.  Please note that this is not an exhaustive list and there could be others.   
+
 | Board                     | Update Firmware                                   | Recovery Image                                |
 | ------------------------- | ------------------------------------------------- | ----------------------------------------------|
 | Nordic-nRF51-DK           | 0244_sam3u2c_bootloader_update_0x5000.bin         | bootloader_bin/0244_sam3u2c_bl_0x5000.bin     |
@@ -159,13 +161,7 @@ While holding the board's reset button, connect it to your computer via the boar
 | TWK-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
 | HVP-KE18F                 | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
 | MTS-xDot-L151CC           | 0244_k20dx_bootloader_update_0x8000.bin           | bootloader_bin/0244_k20dx_bl_0x8000.bin       |
-| FRDM-K20DX                | NA                                                | NA                                            |
-| FRDM-KL05Z                | NA                                                | NA                                            |
-| FRDM-KL25Z                | NA                                                | NA                                            |
-| FRDM-KL26Z                | NA                                                | NA                                            |
-| FRDM-KL27Z                | NA                                                | NA                                            |
-| FRDM-KL43Z                | NA                                                | NA                                            |
-| FRDM-KL46Z                | NA                                                | NA                                            |
+
 
 ## <a name="versions"></a>Information about versions susceptible to problems
 This section is not required to perform any firmware updates, but can provide you with further information on the interface and bootloader versions that are susceptible to bricking and corruption. 
