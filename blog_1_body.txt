@@ -1,0 +1,74 @@
+=== DAPLink updates and Windows 10 ===
+
+While investigating issues reported on the forums about Windows 10 bricking Mbed Enabled boards when updating the interface firmware, the DAPLink team discovered that boards with older bootloader versions (older than the DAPLink project itself) had a vulnerability to corruption.  The symptom has been described as "bricking," or not mounting as a mass storage drive when connected to the computer over USB. The problem can manifest itself in two different ways. Both cases make the boards appear bricked.
+
+# In one case, the debug interface application receives data in an unexpected order causing the debug interface application to crash on boot.  **We'll call this a corrupted state.**  You can recover the board by updating the debug interface firmware again.
+# In the second case, the out of order sequence erases the bootloader.  **We'll call this as a bricked state.**  You can recover the board by flashing a new bootloader.
+
+While this could happen on any operating system, it has only been verified to happen on Windows 8 and Windows 10 when storage services are running. If your device is in a corrupted state or bricked state this guide will help you safely update your boards. We'd recommend that all development boards in existence are updated to take advantage of the improvements and fixes in the DAPLink bootloader. 
+
+That said, we have narrowed down specific versions that are susceptible to a corrupted state or bricked state. Bootloaders with version 1000 are susceptible to bricking.
+
+=== How to update your boards ===
+
+The flowchart will let you determine if your board is in a corrupted state or a bricked state. For boards in a corrupt state or boards that you just want to update with the latest version of the DAPLink bootloader, files and steps are provided in this blog [[https://os.mbed.com/blog/entry/Update-to-DAPLink-bootloader-part-2-Repr/|**If you've determined that your board is in a bricked state we've published a second blog with files and steps to follow.**]] It's important to use the update procedure and corresponding files and not to mix them.
+
+{{/media/uploads/c1728p9/flowchart.png|Flowchart used to determine necessary update steps.}}
+
+=== Updating the DAPLink bootloader ===
+
+DAPLink bootloader update builds are available for download from the table below. TThese are built with the same application offset address as the boards was originally shipped with, 20k or 32k, such that DAPLink interface firmware or 3rd party interface firmware will be compatible as currently published. There may be more boards than listed that these updates are compatible with. Ask a question in the forums if you have a board not listed and wish to update the bootloader.
+
+
+|=Board                     |=Update Firmware                                                                                                   |
+| Nordic-nRF51-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    |
+| Nordic-nRF52-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    |
+| Nordic-nRF51-Dongle       | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    |
+| Nordic-nRF51822           | [[/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin|0244_sam3u2c_bootloader_update_0x5000.bin]]    |
+| FRDM-K64F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        |
+| FRDM-KL82Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        |
+| RedBearLab-nRF51822       | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        |
+| RedBearLab-BLE-Nano       | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x5000.bin|0244_k20dx_bootloader_update_0x5000.bin]]        |
+| FRDM-K22F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| FRDM-K28F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| FRDM-K82F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| FRDM-KW24D                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| FRDM-KL28Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| TWR-KL28Z                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| FRDM-KE15Z                | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| TWK-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| HVP-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+| MTS-xDot-L151CC           | [[/media/uploads/c1728p9/0244_k20dx_bootloader_update_0x8000.bin|0244_k20dx_bootloader_update_0x8000.bin]]        |
+
+===== Step 1. Disable storage services =====
+On Windows 8 and Windows 10 computers only, you'll need to disable storage services to prevent the condition that can cause out of order data transfers. Press and hold the Windows Logo Key, and then press R. This opens the Windows //Run// prompt. Once the //Run// prompt opens, type in {{{services.msc}}}, and click the //OK// button.
+
+{{/media/uploads/c1728p9/run.png|Open up the services application.}}
+
+Once the Services application opens, double click the item from the list named //Storage Service//.  
+
+{{/media/uploads/c1728p9/services.png|Look for the setting named Storage Service.}}
+
+Storage Service Properties is now open. Click the button named //Stop//.
+
+{{/media/uploads/c1728p9/stop.png|Storage Service settings with the Stop button highlighted.}}
+
+===== Step 2: Update the bootloader =====
+Locate your board in the table above, and download the updated DAPLink bootloader image. This is the file used to update your device.
+
+While holding the board's reset button, connect it to your computer using the board's debug USB port. The device mounts in its bootloader mode. Open this device's root directory, and then drag and drop the firmware update into this directory. The board begins the updating process.
+
+Allow the update a few seconds to complete, and then unplug and replug the board into your computer normally (without holding down the reset button). Your device now has the updated bootloader and mounts as //MAINTENANCE//. 
+
+===== Step 3: Re-enable storage services =====
+If you performed the update on a Windows 8 or Windows 10 computer, turn storage services back on by following the same steps listed in step 1, but this time, click the button name //Start// instead of //Stop//. 
+
+===== Step 4: Install an interface firmware application =====
+You can now install any interface firmware version but [[https://github.com/mbedmicro/DAPLink/releases/latest|we'd suggest getting the latest build from DAPLink.]] Download and unzip the package. After unzipping, find the file containing the name of your board.
+
+With the device mounted as //MAINTENANCE//, open the device's root directory, and then drag and drop the firmware update into this directory. The board begins the updating process and completes after a few seconds. When complete the board with unmount and remount as //DAPLINK// and the update is complete.
+
+----
+
+=== Conclusions ===
+Your devices should now be update and in good working order. To check the version of the DAPLink bootloader or interface firmware have a look in the {{{DETAILS.TXT}}} when the device is mounted as //MAINTENANCE// or //DAPLink//

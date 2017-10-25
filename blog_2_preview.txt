@@ -1,0 +1,2 @@
+== Reprogramming a bricked bootloader ==
+This is part 2 of a guide that discusses how to recover bricked Mbed boards. To determine if your board is bricked or corrupted, please see [[https://os.mbed.com/blog/entry/Update-to-DAPLink-Bootloader/|previous post]]. If the [[https://os.mbed.com/blog/entry/Update-to-DAPLink-Bootloader/|previous blog post]] directed you to this post, then your bootloader has been bricked and requires a debugger to reprogram it. After the bootloader has been reprogrammed, all that remains is updating its interface. Begin by following the steps below.

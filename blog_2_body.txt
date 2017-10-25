@@ -1,0 +1,84 @@
+=== Required items ===
+* Debug interface pod (Step 1 below will discuss various options available).
+* [[https://github.com/mbedmicro/pyOCD|pyOCD]].
+* [[https://www.adafruit.com/product/1675|10 pin debug cable]].
+
+=== Step 1: Acquire an external debug interface pod ===
+You have a few different options when it comes to using the debugger to reprogram your bootloader. One option is to use a [[https://developer.mbed.org/platforms/SWDAP-LPC11U35/|CMSIS-DAP]] debugging probe. Alternatively, it is possible to use another FRDM board to program your bricked board. Depending on the board, you may need to solder an SWD header and set jumpers or cut traces. Here are some tutorials on how to modify the [[https://mcuoneclipse.com/2015/09/08/using-frdm-k64f-board-to-debug-another-kinetis-board/|FRDM-K64F]], [[https://mcuoneclipse.com/2013/04/21/using-the-freedom-board-as-jtag-programmer/|FRDM-KL25Z]] and [[https://mcuoneclipse.com/2015/08/19/using-the-freescale-freedom-frdm-kl43z-to-debug-other-boards/|FRDM-KL43Z]] to do just that.
+
+=== Step 2: Install pyOCD ===
+pyOCD is an open source Python-based library for programming and debugging ARM Cortex-M microcontrollers using a debugger. With Python 2.7 installed, you can install pyOCD using the following command. (Install as superuser if you are using a Linux machine.)
+{{{
+pip install pyOCD
+}}}
+
+=== Step 3: Connect debugger to bricked board ===
+Locate the 10-pin header associated with your bricked board's k20dx interface MCU. Usually, the header is near the debug USB port on the device. Connect your 10-pin debug cable to this header, so pin 1 of the header connects to the red wire on your debug cable. The pin numbering is printed on the silkscreen of your board for your reference. In the image below, we drew a green square around the k20dx interface MCU found on a bricked FRDM-K22F and a green circle around pin 1 of its corresponding 10-pin header.
+
+{{/media/uploads/c1728p9/header.png|K20dx flash chip and associated 10-pin header. Pin 1 on the header had been circled.}}
+
+After this, connect the debugger to your bricked board. Ensure that both the debugger and the bricked board are plugged into your computer using a USB cable so that they have power. The image below is an example of how to use a FRDM-K64F as a debugger to reprogram a bricked FRDM-K22F.
+
+{{/media/uploads/c1728p9/connected.png|Using a FRDM-K64F as a debugger to reprogram a bricked FRDM-K22F.}}
+
+=== Step 4: Flashing the updated bootloader ===
+Now you are ready to flash the board with the updated DAPLink bootloader in the table below. To run pyOCD's flashtool, use the command below. (Run with superuser privileges if you are using a Linux machine.) Note, replace {{{<PATH TO DAPLINK BINARY>}}} with the file location of the DAPLink binary on your system.
+{{{
+pyocd-flashtool <PATH TO DAPLINK BINARY> -t k20d50m
+}}}
+If you have multiple devices connected to your computer, the console prompts you to specify which device pyOCD to use as the debugger. The output looks similar to the following:
+{{{
+id => usbinfo | boardname
+0 => NXP LPC800-MAX [k20d50m]
+1 => FRDM-K64F [k20d50m]
+input id num to choice your board want to connect
+}}}
+From this list, choose the ID number that represents your debugger, and then hit {{{Enter}}}.
+
+The reprogramming begins, and the terminal reports something like the following:
+
+{{{
+INFO:root:DAP SWD MODE initialised
+WARNING:root:K20D50M in secure state: will try to unlock via mass erase
+WARNING:root:K20D50M secure state: unlocked successfully
+INFO:root:ROM table #0 @ 0xe00ff000 cidr=b105100d pidr=4000bb4c4
+INFO:root:[0]<e000e000:SCS-M3 cidr=b105e00d, pidr=4000bb000, class=14>
+WARNING:root:Invalid coresight component, cidr=0x0
+INFO:root:[1]<e0001000: cidr=0, pidr=0, component invalid>
+INFO:root:[2]<e0002000:FPB cidr=b105e00d, pidr=4002bb003, class=14>
+WARNING:root:Invalid coresight component, cidr=0xb1b1b1b1
+INFO:root:[3]<e0000000: cidr=b1b1b1b1, pidr=b1b1b1b1b1b1b1b1, component invalid>
+WARNING:root:Invalid coresight component, cidr=0x0
+INFO:root:[4]<e0040000: cidr=0, pidr=0, component invalid>
+INFO:root:CPU core is Cortex-M4
+INFO:root:6 hardware breakpoints, 4 literal comparators
+INFO:root:4 hardware watchpoints
+[====================] 100%
+INFO:root:Programmed 131072 bytes (128 pages) at 25.32 kB/s
+
+}}}
+
+Once the reprogramming is complete, the bootloader is now updated. Now that you have an updated bootloader, the next step is to update your device's interface with normal firmware. The table below shows the recovery bootloader firmware you can use.
+
+== Firmware update table ==
+The following list of boards may have an old bootloader and are recommended to update.  Please note that this is not an exhaustive list, and there could be others.   
+
+|=Board                     |=Recovery Image                                                                    |
+| Nordic-nRF51-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF52-DK           | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF51-Dongle       | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| Nordic-nRF51822           | [[/media/uploads/c1728p9/0244_sam3u2c_bl_0x5000.bin|0244_sam3u2c_bl_0x5000.bin]]  |
+| FRDM-K64F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| FRDM-KL82Z                | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| RedBearLab-nRF51822       | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| RedBearLab-BLE-Nano       | [[/media/uploads/c1728p9/0244_k20dx_bl_0x5000.bin|0244_k20dx_bl_0x5000.bin]]      |
+| FRDM-K22F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-K28F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-K82F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KW24D                | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KL28Z                | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| TWR-KL28Z                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| FRDM-KE15Z                | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| TWK-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| HVP-KE18F                 | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
+| MTS-xDot-L151CC           | [[/media/uploads/c1728p9/0244_k20dx_bl_0x8000.bin|0244_k20dx_bl_0x8000.bin]]      |
